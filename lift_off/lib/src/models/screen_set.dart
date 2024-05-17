@@ -7,10 +7,12 @@ class ScreenSet {
     required this.screens,
     required this.screenSize,
     required this.scaleFactor,
+    required this.platform,
   });
 
   final String name;
   final List<Screen> screens;
   final Size screenSize;
   final double scaleFactor;
+  final TargetPlatform platform;
 }

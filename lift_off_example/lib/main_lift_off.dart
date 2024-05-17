@@ -15,6 +15,7 @@ Future<void> main() async {
           ],
           screenSize: Size(1080, 2160),
           scaleFactor: 3,
+          platform: TargetPlatform.android,
         ),
         ScreenSet(
           name: 'iPhone 6.7"',
@@ -25,6 +26,7 @@ Future<void> main() async {
           ],
           screenSize: Size(1290, 2796),
           scaleFactor: 3,
+          platform: TargetPlatform.iOS,
         ),
         ScreenSet(
           name: 'iPhone 5.5"',
@@ -35,6 +37,7 @@ Future<void> main() async {
           ],
           screenSize: Size(1242, 2208),
           scaleFactor: 3,
+          platform: TargetPlatform.iOS,
         ),
       ],
     ),
