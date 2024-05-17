@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:lift_off/src/models/screen_set.dart';
 import 'package:lift_off/src/widgets/screen_set_widget.dart';
+import 'package:screenshot/screenshot.dart';
 
 class LiftOffApp extends StatefulWidget {
   const LiftOffApp({
@@ -27,6 +31,65 @@ class _LiftOffAppState extends State<LiftOffApp> {
     });
   }
 
+  Future<void> _saveScreenshots() async {
+    final directoryPath = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: 'Where would you like to save the screenshots?',
+      lockParentWindow: true,
+    );
+
+    if (directoryPath == null) {
+      debugPrint('Save File cancled: User did not pick a directory.');
+      return;
+    }
+    debugPrint('User picked directory: $directoryPath');
+    final rootDirectory = File(directoryPath);
+
+    try {
+      final screenshotController = ScreenshotController();
+
+      for (final screenshotSet in widget.sets) {
+        final setDirectory = Directory('${rootDirectory.path}/${screenshotSet.name}');
+
+        if (await setDirectory.exists()) {
+          await setDirectory.delete();
+        }
+        await setDirectory.create();
+
+        final scaledSize = Size(
+          screenshotSet.screenSize.width / screenshotSet.scaleFactor,
+          screenshotSet.screenSize.height / screenshotSet.scaleFactor,
+        );
+
+        for (final shot in screenshotSet.screens.indexed) {
+          final screenshotFile = File('${setDirectory.path}/${screenshotSet.name}_${shot.$1}.png');
+
+          final widgetToScreenshot = MediaQuery(
+            data: MediaQueryData(
+              size: scaledSize,
+            ),
+            child: Theme(
+              data: ThemeData(platform: screenshotSet.platform),
+              child: SizedBox.fromSize(
+                size: scaledSize,
+                child: shot.$2.widget,
+              ),
+            ),
+          );
+
+          final image = await screenshotController.captureFromWidget(
+            widgetToScreenshot,
+            pixelRatio: screenshotSet.scaleFactor,
+          );
+          screenshotFile.writeAsBytes(image);
+        }
+      }
+
+      debugPrint('Screenshots saved to: ${rootDirectory.path}');
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,6 +101,11 @@ class _LiftOffAppState extends State<LiftOffApp> {
             title: const Text('🚀 Lift Off'),
             centerTitle: false,
             actions: [
+              TextButton.icon(
+                onPressed: _saveScreenshots,
+                icon: const Icon(Icons.save_outlined),
+                label: const Text('Save'),
+              ),
               Text('Zoom: ${scale.toStringAsPrecision(2)}x'),
               Slider(
                 value: scale,

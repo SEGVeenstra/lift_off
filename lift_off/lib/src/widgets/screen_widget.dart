@@ -16,8 +16,8 @@ class ScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.yellow.shade100,
+    return ClipRect(
+      clipBehavior: Clip.hardEdge,
       child: AbsorbPointer(
         child: FittedBox(
           child: SizedBox(
