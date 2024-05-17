@@ -4,8 +4,18 @@ import 'package:lift_off_example/main.dart';
 
 Future<void> main() async {
   const screen1 = MaterialApp(home: MyHomePage(title: 'Screen 1'), debugShowCheckedModeBanner: false);
-  const screen2 = MaterialApp(home: MyHomePage(title: 'Screen 2'), debugShowCheckedModeBanner: false);
-  const screen3 = MaterialApp(home: MyHomePage(title: 'Screen 3'), debugShowCheckedModeBanner: false);
+  const screen2 = MaterialApp(
+      home: MyHomePage(
+        title: 'Screen 2',
+        initialValue: 3,
+      ),
+      debugShowCheckedModeBanner: false);
+  const screen3 = MaterialApp(
+      home: MyHomePage(
+        title: 'Screen 3',
+        initialValue: 9001,
+      ),
+      debugShowCheckedModeBanner: false);
 
   runApp(
     const LiftOffApp(

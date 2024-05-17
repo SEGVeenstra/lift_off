@@ -23,6 +23,13 @@ class LiftOffApp extends StatefulWidget {
 
 class _LiftOffAppState extends State<LiftOffApp> {
   double scale = 5.0;
+  bool _isBusy = false;
+
+  _setIsBusy(bool isBusy) {
+    setState(() {
+      _isBusy = isBusy;
+    });
+  }
 
   void _setScale(double scale) {
     setState(() {
@@ -32,6 +39,8 @@ class _LiftOffAppState extends State<LiftOffApp> {
   }
 
   Future<void> _saveScreenshots() async {
+    if (_isBusy) return;
+
     final directoryPath = await FilePicker.platform.getDirectoryPath(
       dialogTitle: 'Where would you like to save the screenshots?',
       lockParentWindow: true,
@@ -41,6 +50,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
       debugPrint('Save File cancled: User did not pick a directory.');
       return;
     }
+    _setIsBusy(true);
     debugPrint('User picked directory: $directoryPath');
     final rootDirectory = File(directoryPath);
 
@@ -51,7 +61,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
         final setDirectory = Directory('${rootDirectory.path}/${screenshotSet.name}');
 
         if (await setDirectory.exists()) {
-          await setDirectory.delete();
+          await setDirectory.delete(recursive: true);
         }
         await setDirectory.create();
 
@@ -88,6 +98,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
     } catch (e) {
       debugPrint(e.toString());
     }
+    _setIsBusy(false);
   }
 
   @override
@@ -103,7 +114,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
             actions: [
               TextButton.icon(
                 onPressed: _saveScreenshots,
-                icon: const Icon(Icons.save_outlined),
+                icon: _isBusy ? const CircularProgressIndicator() : const Icon(Icons.save_outlined),
                 label: const Text('Save'),
               ),
               Text('Zoom: ${scale.toStringAsPrecision(2)}x'),

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, this.initialValue = 0});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -49,13 +49,14 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  final int initialValue;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late int _counter = widget.initialValue;
 
   void _incrementCounter() {
     setState(() {
