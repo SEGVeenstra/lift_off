@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lift Off (debug mode)",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_lift_off.dart"
+        },
+        {
+            "name": "Lift Off (profile mode)",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main_lift_off.dart"
+        },
+        {
+            "name": "Lift Off (release mode)",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main_lift_off.dart"
+        },
+        {
+            "name": "Example App",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Example App (profile mode)",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Example App (release mode)",
+            "cwd": "lift_off_example",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

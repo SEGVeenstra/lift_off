@@ -31,15 +31,17 @@ class ScreenSetWidget extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(
               width: 32,
             ),
-            itemBuilder: (context, index) => SizedBox(
-              width: set.screenSize.width / 2, // TODO replace with scale
-              height: set.screenSize.height / 2, // TODO replace with scale
-              child: FittedBox(
-                fit: BoxFit.fill,
-                child: SizedBox(
-                  width: set.screenSize.width,
-                  height: set.screenSize.height,
-                  child: set.screens[index].widget,
+            itemBuilder: (context, index) => AbsorbPointer(
+              child: SizedBox(
+                width: set.screenSize.width / 2, // TODO replace with scale
+                height: set.screenSize.height / 2, // TODO replace with scale
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: SizedBox(
+                    width: set.screenSize.width,
+                    height: set.screenSize.height,
+                    child: set.screens[index].widget,
+                  ),
                 ),
               ),
             ),
