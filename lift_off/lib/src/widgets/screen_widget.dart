@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:lift_off/lift_off.dart';
+import 'package:flutter/material.dart';
 
 class ScreenWidget extends StatelessWidget {
   const ScreenWidget({
@@ -7,22 +6,23 @@ class ScreenWidget extends StatelessWidget {
     required this.width,
     required this.height,
     required this.child,
+    required this.scaleFactor,
   });
 
   final Widget child;
   final double width;
   final double height;
+  final double scaleFactor;
 
   @override
   Widget build(BuildContext context) {
-    return AbsorbPointer(
-      child: SizedBox(
-        width: width / LiftOffApp.info(context).scale,
-        height: height / LiftOffApp.info(context).scale,
+    return ColoredBox(
+      color: Colors.yellow.shade100,
+      child: AbsorbPointer(
         child: FittedBox(
           child: SizedBox(
-            width: width,
-            height: height,
+            width: width / scaleFactor,
+            height: height / scaleFactor,
             child: child,
           ),
         ),

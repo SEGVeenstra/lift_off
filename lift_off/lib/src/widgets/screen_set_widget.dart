@@ -35,6 +35,7 @@ class ScreenSetWidget extends StatelessWidget {
             itemBuilder: (context, index) => ScreenWidget(
               width: set.screenSize.width,
               height: set.screenSize.height,
+              scaleFactor: set.scaleFactor,
               child: set.screens[index].widget,
             ),
           ),

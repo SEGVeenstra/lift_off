@@ -7,13 +7,24 @@ Future<void> main() async {
     const LiftOffApp(
       sets: [
         ScreenSet(
-          name: 'iPhone 6.5"',
+          name: 'Android Phone',
           screens: [
             Screen(widget: MyHomePage(title: 'Screen 1')),
             Screen(widget: MyHomePage(title: 'Screen 2')),
             Screen(widget: MyHomePage(title: 'Screen 3')),
           ],
-          screenSize: Size(400, 800),
+          screenSize: Size(1080, 2160),
+          scaleFactor: 3,
+        ),
+        ScreenSet(
+          name: 'iPhone 6.7"',
+          screens: [
+            Screen(widget: MyHomePage(title: 'Screen 1')),
+            Screen(widget: MyHomePage(title: 'Screen 2')),
+            Screen(widget: MyHomePage(title: 'Screen 3')),
+          ],
+          screenSize: Size(1290, 2796),
+          scaleFactor: 3,
         ),
         ScreenSet(
           name: 'iPhone 5.5"',
@@ -22,7 +33,8 @@ Future<void> main() async {
             Screen(widget: MyHomePage(title: 'Screen 2')),
             Screen(widget: MyHomePage(title: 'Screen 3')),
           ],
-          screenSize: Size(350, 700),
+          screenSize: Size(1242, 2208),
+          scaleFactor: 3,
         ),
       ],
     ),

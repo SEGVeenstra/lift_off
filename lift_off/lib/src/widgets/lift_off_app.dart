@@ -18,7 +18,7 @@ class LiftOffApp extends StatefulWidget {
 }
 
 class _LiftOffAppState extends State<LiftOffApp> {
-  double scale = 2.0;
+  double scale = 5.0;
 
   void _setScale(double scale) {
     setState(() {
@@ -43,8 +43,8 @@ class _LiftOffAppState extends State<LiftOffApp> {
                 value: scale,
                 onChanged: _setScale,
                 min: 1.0,
-                max: 3.0,
-                divisions: (3 - 1) * 10,
+                max: 5.0,
+                divisions: (5 - 1) * 10,
               ),
             ],
           ),
