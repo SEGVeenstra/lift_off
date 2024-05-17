@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lift_off/src/models/screen_set.dart';
+import 'package:lift_off/lift_off.dart';
+import 'package:lift_off/src/widgets/screen_widget.dart';
 
 class ScreenSetWidget extends StatelessWidget {
   const ScreenSetWidget({
@@ -23,7 +24,7 @@ class ScreenSetWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: set.screenSize.height / 2, // TODO replace with scale
+          height: set.screenSize.height / LiftOffApp.info(context).scale,
           child: ListView.separated(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             itemCount: set.screens.length,
@@ -31,23 +32,26 @@ class ScreenSetWidget extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(
               width: 32,
             ),
-            itemBuilder: (context, index) => AbsorbPointer(
-              child: SizedBox(
-                width: set.screenSize.width / 2, // TODO replace with scale
-                height: set.screenSize.height / 2, // TODO replace with scale
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: SizedBox(
-                    width: set.screenSize.width,
-                    height: set.screenSize.height,
-                    child: set.screens[index].widget,
-                  ),
-                ),
-              ),
+            itemBuilder: (context, index) => ScreenWidget(
+              width: set.screenSize.width,
+              height: set.screenSize.height,
+              child: set.screens[index].widget,
             ),
           ),
         ),
       ],
     );
+  }
+}
+
+class InheritedScreenSetWidget extends InheritedWidget {
+  const InheritedScreenSetWidget({
+    super.key,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+    return true;
   }
 }
