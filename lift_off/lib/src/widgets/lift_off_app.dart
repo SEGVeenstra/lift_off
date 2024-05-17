@@ -81,7 +81,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
               data: ThemeData(platform: screenshotSet.platform),
               child: SizedBox.fromSize(
                 size: scaledSize,
-                child: shot.$2.widget,
+                child: shot.$2,
               ),
             ),
           );
@@ -104,6 +104,7 @@ class _LiftOffAppState extends State<LiftOffApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: InheritedLiftOffApp(
         scale: scale,
         child: Scaffold(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lift_off/src/models/screen.dart';
 
 class ScreenSet {
   const ScreenSet({
@@ -10,8 +9,14 @@ class ScreenSet {
     required this.platform,
   });
 
+  ScreenSet.iPhone14ProMax({required this.screens})
+      : name = 'iPhone 14 Pro Max (6.7")',
+        screenSize = const Size(1290, 2796),
+        scaleFactor = 3,
+        platform = TargetPlatform.iOS;
+
   final String name;
-  final List<Screen> screens;
+  final List<Widget> screens;
   final Size screenSize;
   final double scaleFactor;
   final TargetPlatform platform;
